@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <Header title="Task Tracker" />
+    <AddTask @add-task="addTask" />
     <Tasks
         @delete-task="deleteTask"
         :tasks="tasks"
@@ -12,13 +13,15 @@
 <script>
 import Header from './components/Header';
 import Tasks from './components/Tasks';
+import AddTask from './components/AddTask';
 import db from '../db.json';
 
 export default {
   name: 'App',
   components: {
     Header,
-    Tasks
+    Tasks,
+    AddTask
   },
   data() {
     return {
@@ -26,6 +29,12 @@ export default {
     }
   },
   methods: {
+    addTask(task) {
+      this.tasks = [
+          ...this.tasks,
+          task
+      ];
+    },
     deleteTask(id) {
       if (confirm('Are you sure?')) {
         this.tasks = this.tasks.filter(task => task.id !== id);

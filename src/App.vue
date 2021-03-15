@@ -1,13 +1,18 @@
 <template>
   <div class="container">
     <Header title="Task Tracker" />
-    <Tasks tasks="tasks" />
+    <Tasks
+        @delete-task="deleteTask"
+        :tasks="tasks"
+    />
   </div>
 </template>
 
 <script>
 import Header from './components/Header';
 import Tasks from './components/Tasks';
+import db from '../db.json';
+
 export default {
   name: 'App',
   components: {
@@ -16,12 +21,17 @@ export default {
   },
   data() {
     return {
-      tasks: []
+      tasks: db.tasks
     }
   },
-  created() {
-    this.tasks = [];
+  methods: {
+    deleteTask(id) {
+      if (confirm('Are you sure?')) {
+        this.tasks = this.tasks.filter(task => task.id !== id);
+      }
+    }
   }
+
 }
 </script>
 
@@ -37,7 +47,7 @@ body {
 }
 
 .container {
-  max-width: 500px;
+  max-width: 680px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;

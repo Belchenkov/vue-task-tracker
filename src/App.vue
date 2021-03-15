@@ -4,6 +4,7 @@
     <Tasks
         @delete-task="deleteTask"
         :tasks="tasks"
+        @toggle-reminder="toggleReminder"
     />
   </div>
 </template>
@@ -29,6 +30,9 @@ export default {
       if (confirm('Are you sure?')) {
         this.tasks = this.tasks.filter(task => task.id !== id);
       }
+    },
+    toggleReminder(id) {
+      this.tasks = this.tasks.map(task => task.id === id ? {...task, reminder: !task.reminder} : task);
     }
   }
 

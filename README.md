@@ -1,4 +1,4 @@
-# Vue3 Task Tracker
+# Vue 3 Task Tracker
 
 > Create Task Tracker on Vue 3
 

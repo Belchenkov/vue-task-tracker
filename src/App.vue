@@ -20,7 +20,6 @@
 import Header from './components/Header';
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
-import db from '../db.json';
 
 export default {
   name: 'App',
@@ -31,9 +30,12 @@ export default {
   },
   data() {
     return {
-      tasks: db.tasks,
+      tasks: [],
       showAddTask: false
     }
+  },
+  async created() {
+    this.tasks = await this.fetchTasks();
   },
   methods: {
     addTask(task) {
@@ -52,6 +54,10 @@ export default {
     },
     toggleAddTask() {
       this.showAddTask = !this.showAddTask;
+    },
+    async fetchTasks() {
+      const res = await fetch('http://localhost:5000/tasks');
+      return  await res.json();
     }
   }
 

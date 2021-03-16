@@ -38,10 +38,20 @@ export default {
     this.tasks = await this.fetchTasks();
   },
   methods: {
-    addTask(task) {
+    async addTask(task) {
+      const res = await fetch('api/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(task)
+      });
+
+      const data = await res.json();
+
       this.tasks = [
           ...this.tasks,
-          task
+          data
       ];
     },
     deleteTask(id) {
@@ -56,11 +66,14 @@ export default {
       this.showAddTask = !this.showAddTask;
     },
     async fetchTasks() {
-      const res = await fetch('http://localhost:5000/tasks');
+      const res = await fetch('api/tasks');
+      return  await res.json();
+    },
+    async fetchTask(id) {
+      const res = await fetch(`api/tasks/${id}`);
       return  await res.json();
     }
   }
-
 }
 </script>
 

@@ -2,6 +2,8 @@
 
 > Create Task Tracker on Vue 3
 
+[![IMAGE ALT TEXT HERE](./uploads/screen.png)](https://nimb.ws/RQUaH9)
+
 ## Project setup
 ```
 npm install
